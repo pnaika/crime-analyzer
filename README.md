@@ -1,6 +1,7 @@
 # crime-analyser
 
 > A simple vueJS app to analyze crime data
+> Main features include Router, ExpressJS, VueX
 
 ## Build Setup
 
@@ -8,8 +9,12 @@
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
+# serve with hot reload of server at localhost:3000
+npm run server
+
+# Open another terminal
+# serve with hot reload of application at localhost:8080
+npm run start
 
 # build for production with minification
 npm run build
