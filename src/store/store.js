@@ -1,12 +1,14 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
 import axios from 'axios';
+import {crimeListTrans} from './../transformers/crimeListTransformer.js';
 
 Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         crimeList: [],
-        primaryType: []
+        primaryType: [],
+        criminalListFields: []
     },
     getters: {
         crimeList: state => state.crimeList,
@@ -14,7 +16,9 @@ const store = new Vuex.Store({
     },
     mutations: {
         setCrimeList(state, value) {
-            state.crimeList = value
+            const formatedList = crimeListTrans(value);
+            state.crimeList = formatedList.data;
+            state.criminalListFields = formatedList.fields;
         },
         setPrimaryTypeList(state, value) {
             state.primaryType = value

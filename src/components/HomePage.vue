@@ -1,23 +1,46 @@
 <template>
     <div class="hello">
         Simple Application for Crime Data
-        <b-button>I am a Button</b-button>
+        <b-table :items="getCrimeList">
+            <template slot="case_number" slot-scope="data">
+                <a :href="`#/${data.value}`">
+                    {{data.value}}
+                </a>
+            </template>
+        </b-table>
     </div>
 </template>
 
 <script>
-    import {mapActions} from 'vuex';
 
     export default {
         name: 'HomePage',
         data() {
-            return {}
+            return {
+                crimeList: [],
+                fields: [
+                    {
+                        // A column that needs custom formatting,
+                        // calling formatter 'fullName' in this app
+                        key: 'case_number',
+                        label: 'Full Name'
+                    }
+                    ]
+            }
         },
         mounted() {
             this.$store.dispatch('getCrimeData');
             this.$store.dispatch('getPrimaryTypeList');
         },
         components: {},
+        computed: {
+            getCrimeList() {
+                return this.$store.getters.crimeList;
+            },
+            getCrimeFields() {
+                return this.$store.getters.criminalListFields;
+            }
+        },
         methods: {}
     }
 </script>
