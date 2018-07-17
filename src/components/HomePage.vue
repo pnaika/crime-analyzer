@@ -1,9 +1,11 @@
 <template>
     <div class="hello">
         Simple Application for Crime Data
+        <filter-set></filter-set>
+        <ring-loader v-show="isDataLoading" class="loading-spinner"></ring-loader>
         <b-table :items="getCrimeList">
             <template slot="case_number" slot-scope="data">
-                <a :href="`#/${data.value}`">
+                <a :href="`#/${data.value}`" @click="getDetails(data.value)">
                     {{data.value}}
                 </a>
             </template>
@@ -13,38 +15,47 @@
 
 <script>
 
+    import FilterSet from './FilterSet.vue';
+    import RingLoader from 'vue-spinner/src/RingLoader.vue'
+
     export default {
         name: 'HomePage',
         data() {
             return {
-                crimeList: [],
-                fields: [
-                    {
-                        // A column that needs custom formatting,
-                        // calling formatter 'fullName' in this app
-                        key: 'case_number',
-                        label: 'Full Name'
-                    }
-                    ]
+                crimeList: []
             }
         },
         mounted() {
             this.$store.dispatch('getCrimeData');
-            this.$store.dispatch('getPrimaryTypeList');
         },
-        components: {},
+        components: {
+            FilterSet,
+            RingLoader
+        },
         computed: {
             getCrimeList() {
                 return this.$store.getters.crimeList;
+            },
+            isDataLoading() {
+                return this.$store.getters.isLoading;
             },
             getCrimeFields() {
                 return this.$store.getters.criminalListFields;
             }
         },
-        methods: {}
+        methods: {
+            getDetails(case_number) {
+                this.$store.dispatch('getCrimeDataByCaseNumber', case_number);
+            }
+        }
     }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    .loading-spinner {
+        position: fixed;
+        top: 40%;
+        display: inline-flex;
+    }
 </style>
