@@ -8,11 +8,15 @@ const store = new Vuex.Store({
     state: {
         crimeList: [],
         primaryType: [],
-        criminalListFields: []
+        criminalListFields: [],
+        caseDetails: {},
+        isLoading: false
     },
     getters: {
         crimeList: state => state.crimeList,
-        primaryType: state => state.primaryType
+        primaryType: state => state.primaryType,
+        caseDetails: state => state.caseDetails,
+        isLoading: state => state.isLoading
     },
     mutations: {
         setCrimeList(state, value) {
@@ -22,35 +26,65 @@ const store = new Vuex.Store({
         },
         setPrimaryTypeList(state, value) {
             state.primaryType = value
+        },
+        setCaseDetails(state, value) {
+            state.caseDetails = value[0]
+        },
+        setLoader(state, value) {
+            state.isLoading = value
         }
     },
     actions: {
         getCrimeData({commit}) {
+            commit('setLoader', true);
             axios
                 .get('http://localhost:3000')
                 .then(response => {
-                    commit('setCrimeList', response.data)
+                    commit('setCrimeList', response.data);
+                    commit('setLoader', false);
                 })
                 .catch(e => {
-                    console.log('error occured', e)
+                    console.log('error occured', e);
+                    commit('setLoader', false);
                 })
         },
         getPrimaryTypeList({commit}) {
+            commit('setLoader', true);
             axios
                 .get('http://localhost:3000/primaryTypes')
                 .then(response => {
-                    commit('setPrimaryTypeList', response.data)
+                    commit('setPrimaryTypeList', response.data);
+                    commit('setLoader', false);
                 })
                 .catch(e => {
-                    console.log('error occured', e)
+                    console.log('error occured', e);
+                    commit('setLoader', false);
                 })
         },
         getCrimeDataByType({commit}, primaryType) {
+            commit('setLoader', true);
             axios
                 .get(`http://localhost:3000/primaryTypes/${primaryType}`)
-                .then(response => (console.log('response is', response.data)))
+                .then(response => {
+                    commit('setCrimeList', response.data);
+                    commit('setLoader', false);
+                })
                 .catch(e => {
-                    console.log('error occured', e)
+                    console.log('error occured', e);
+                    commit('setLoader', false);
+                })
+        },
+        getCrimeDataByCaseNumber({commit}, case_number) {
+            commit('setLoader', true);
+            axios
+                .get(`http://localhost:3000/details/${case_number}`)
+                .then(response => {
+                    commit('setCaseDetails', response.data);
+                    commit('setLoader', false);
+                })
+                .catch(e => {
+                    console.log('error occured', e);
+                    commit('setLoader', false);
                 })
         }
     }
