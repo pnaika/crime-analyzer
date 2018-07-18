@@ -1,7 +1,7 @@
 # crime-analyser
 
 > A simple VueJS web application to analyze crime data (www.cityOfChicago.org),
-> Main features include Vue, WebPack, Vue Router, ExpressJS, VueX and loaders. (understand package.json to know more)
+> Main features include Vue, WebPack, Vue Router, ExpressJS, VueX , Vue-bootstrap and loaders. (understand package.json to know more)
 
 >This application is to demonstrate how easily we can build a simple web app in very short interval of time using above 
 >features
@@ -17,11 +17,11 @@ git clone https://github.com/pnaika/crime-analyzer.git
 npm install
 
 # Run scripts that are defined in package.json
-# serve with hot reload of server at localhost:3000 (Uses nodemon for auto reload of a serve)
+# serve with hot reload of server at localhost:3000 (Uses nodemon for auto reload of a server)
 npm run server
 
 # Open another terminal
-# Serve with hot reload of application at localhost:8080 (This runs the actual application)
+# Serve web application at localhost:8080
 npm run start
 
 # This app has two screens, Shows the list of Crimes in Chicago (Data is captured from cityOfChicago.org).
