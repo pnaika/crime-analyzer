@@ -1,4 +1,4 @@
-# crime-analyser
+# crime-analyzer
 
 > A simple VueJS web application to analyze crime data (www.cityOfChicago.org),
 > Main features include Vue, WebPack, Vue Router, ExpressJS, VueX , Vue-bootstrap and loaders. (understand package.json to know more)
