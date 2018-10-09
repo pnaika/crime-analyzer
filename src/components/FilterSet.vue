@@ -11,7 +11,7 @@
                     <b-dropdown id="ddown1" text="Select Primary Type" class="m-md-2">
                         <b-dropdown-item
                                 className="drop-down-stuff"
-                                v-for="(primaryType, index) in getPrimatyTypes"
+                                v-for="(primaryType, index) in getPrimaryTypes"
                                 :key="index"
                                 @click="getCrimeList(primaryType)">
                             {{primaryType}}
@@ -45,7 +45,7 @@
             this.$store.dispatch('getPrimaryTypeList');
         },
         computed: {
-            getPrimatyTypes() {
+            getPrimaryTypes() {
                 return this.$store.getters.primaryType;
             },
         },
