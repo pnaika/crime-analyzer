@@ -56,11 +56,13 @@ app.get('/primaryTypes', async (req, res) => {
     res.send(primaryType)
 });
 
-app.get('/primaryTypes/:primaryType', async (req, res) => {
+
+app.get('/primaryTypes/:primaryType/:years?', async (req, res) => {
     const primaryType = req.params.primaryType || '';
+    const years = req.params.years || '2018';
     let crimeData = [];
     try {
-        crimeData = await fetch(`https://data.cityofchicago.org/resource/crimes.json?primary_type=${primaryType}`)
+        crimeData = await fetch(`https://data.cityofchicago.org/resource/crimes.json?primary_type=${primaryType}&year=${years}`)
             .then((res) => {
                 return res.json();
             });
