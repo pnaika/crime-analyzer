@@ -1,5 +1,6 @@
 <template>
     <div class="hello">
+        <a href="http://localhost:8081/"> Back to List</a>
         <h1>Case Details</h1>
         <ring-loader v-show="isDataLoading" class="loading-spinner"></ring-loader>
         <b-card :title="getCrimeDetails.case_number">

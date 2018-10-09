@@ -61,10 +61,10 @@ const store = new Vuex.Store({
                     commit('setLoader', false);
                 })
         },
-        getCrimeDataByType({commit}, primaryType) {
+        getCrimeDataByType({commit}, obj = {}) {
             commit('setLoader', true);
             axios
-                .get(`http://localhost:3000/primaryTypes/${primaryType}`)
+                .get(`http://localhost:3000/primaryTypes/${obj.primaryType}/${obj.year}`)
                 .then(response => {
                     commit('setCrimeList', response.data);
                     commit('setLoader', false);

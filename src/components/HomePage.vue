@@ -1,6 +1,6 @@
 <template>
     <div class="hello">
-        Simple Application for Crime Data
+        <h2>Simple Application for Crime Data</h2>
         <filter-set></filter-set>
         <ring-loader v-show="isDataLoading" class="loading-spinner"></ring-loader>
         <b-table :items="getCrimeList">
