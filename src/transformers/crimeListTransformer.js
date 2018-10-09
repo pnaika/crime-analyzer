@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import moment from 'moment';
 
 const getCrimeList = (list) => {
     console.log(list)
@@ -6,7 +7,7 @@ const getCrimeList = (list) => {
 
     _.forEach(list, data => {
         crimeList.push({
-            date: data.date || '- - -',
+            date: moment(data.date).format('YYYY-MM-DD hh:MM:ss a') || '- - -',
             case_number: data.case_number || '- - -',
             community_area: data.community_area || '- - -',
             year: data.year || '- - -',
