@@ -7,11 +7,11 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "concurrently --kill-others \"npm run server\" \"npm run dev\"",
+    "start": "node server.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "build": "node build/build.js",
-    "server": "nodemon server.js"
+    "server": "nodemon app.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
