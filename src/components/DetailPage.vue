@@ -1,6 +1,6 @@
 <template>
     <div class="hello">
-        <a href="http://localhost:8081/"> Back to List</a>
+        <a href="http://localhost:8080/"> Back to List</a>
         <h1>Case Details</h1>
         <ring-loader v-show="isDataLoading" class="loading-spinner"></ring-loader>
         <b-card :title="getCrimeDetails.case_number">
@@ -103,13 +103,27 @@
         },
         computed: {
             getCrimeDetails() {
-                return this.$store.getters.caseDetails;
+                console.log('getCrimeDetails ' , this.$store.getters.caseDetails.length);
+                return this.getCaseDetails() ;
             },
             isDataLoading() {
                 return this.$store.getters.isLoading;
             },
         },
-        methods: {}
+        methods: {
+            getCaseDetails() {
+                const caseDetails = this.$store.getters.caseDetails;
+                const isEmptyCaseDetails = Object.entries(caseDetails).length === 0 && caseDetails.constructor === Object;
+
+                if (isEmptyCaseDetails)
+                {
+                    const case_number = this.$route.path.substring(1);
+                    this.$store.dispatch('getCrimeDataByCaseNumber', case_number);
+                }
+
+                return this.$store.getters.caseDetails;
+            }
+        }
     }
 </script>
 
